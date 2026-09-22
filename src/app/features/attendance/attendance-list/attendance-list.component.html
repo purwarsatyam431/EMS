@@ -1,0 +1,159 @@
+<div class="page">
+
+  <div class="welcome-section">
+    <div>
+      <h1>Attendance</h1>
+      <p>Track daily check-in, check-out, and attendance status.</p>
+    </div>
+
+    <button mat-flat-button color="primary">
+      <mat-icon>download</mat-icon>
+      Export report
+    </button>
+  </div>
+
+  <div class="stats-grid">
+    <mat-card class="stat-card">
+      <div class="stat-icon present">
+        <mat-icon>check_circle</mat-icon>
+      </div>
+      <div class="stat-content">
+        <span>Present</span>
+        <h2>{{ presentCount }}</h2>
+        <small>On time today</small>
+      </div>
+    </mat-card>
+
+    <mat-card class="stat-card">
+      <div class="stat-icon leave">
+        <mat-icon>schedule</mat-icon>
+      </div>
+      <div class="stat-content">
+        <span>Late</span>
+        <h2>{{ lateCount }}</h2>
+        <small>Checked in after 9:15</small>
+      </div>
+    </mat-card>
+
+    <mat-card class="stat-card">
+      <div class="stat-icon employees">
+        <mat-icon>event_busy</mat-icon>
+      </div>
+      <div class="stat-content">
+        <span>On Leave</span>
+        <h2>{{ leaveCount }}</h2>
+        <small>Approved leave</small>
+      </div>
+    </mat-card>
+
+    <mat-card class="stat-card">
+      <div class="stat-icon absent">
+        <mat-icon>person_off</mat-icon>
+      </div>
+      <div class="stat-content">
+        <span>Absent</span>
+        <h2>{{ absentCount }}</h2>
+        <small>No check-in yet</small>
+      </div>
+    </mat-card>
+  </div>
+
+  <mat-card class="dashboard-card table-card">
+    <mat-card-header>
+      <mat-card-title>Daily attendance</mat-card-title>
+      <span class="spacer"></span>
+      <span class="result-count">{{ filteredRecords.length }} employees</span>
+    </mat-card-header>
+
+    <mat-card-content>
+      <div class="filters">
+        <mat-form-field appearance="outline">
+          <mat-label>Date</mat-label>
+          <input matInput type="date" [(ngModel)]="selectedDate">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Department</mat-label>
+          <mat-select [(ngModel)]="selectedDepartment">
+            <mat-option *ngFor="let department of departments" [value]="department">
+              {{ department }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Status</mat-label>
+          <mat-select [(ngModel)]="selectedStatus">
+            <mat-option *ngFor="let status of statuses" [value]="status">
+              {{ status }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="table-wrap">
+        <table mat-table [dataSource]="filteredRecords">
+
+          <ng-container matColumnDef="employee">
+            <th mat-header-cell *matHeaderCellDef>Employee</th>
+            <td mat-cell *matCellDef="let record">
+              <div class="employee-cell">
+                <div class="avatar">{{ record.initials }}</div>
+                <div>
+                  <strong>{{ record.name }}</strong>
+                  <span>{{ record.id }}</span>
+                </div>
+              </div>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="department">
+            <th mat-header-cell *matHeaderCellDef>Department</th>
+            <td mat-cell *matCellDef="let record">{{ record.department }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="checkIn">
+            <th mat-header-cell *matHeaderCellDef>Check in</th>
+            <td mat-cell *matCellDef="let record">{{ record.checkIn }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="checkOut">
+            <th mat-header-cell *matHeaderCellDef>Check out</th>
+            <td mat-cell *matCellDef="let record">{{ record.checkOut }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="hours">
+            <th mat-header-cell *matHeaderCellDef>Hours</th>
+            <td mat-cell *matCellDef="let record">{{ record.hours }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef>Status</th>
+            <td mat-cell *matCellDef="let record">
+              <span class="status" [ngClass]="statusClass(record.status)">
+                {{ record.status }}
+              </span>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let record">
+              <button
+                mat-button
+                color="primary"
+                *ngIf="record.status === 'Absent'"
+                (click)="markPresent(record)">
+                Mark present
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+</div>

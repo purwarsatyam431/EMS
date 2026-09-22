@@ -1,0 +1,59 @@
+.page {
+  min-height: 100%;
+  color: var(--text-color);
+}
+
+.welcome-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+
+  h1 {
+    margin: 0 0 6px;
+    color: var(--text-color);
+  }
+
+  p {
+    margin: 0;
+    color: var(--secondary-text-color);
+  }
+}
+
+.dashboard-card {
+  background-color: var(--surface-color) !important;
+  color: var(--text-color) !important;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  box-shadow: none !important;
+}
+
+mat-card-title {
+  color: var(--text-color) !important;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px 16px;
+  margin-top: 16px;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+@media (max-width: 700px) {
+  .welcome-section {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+}
