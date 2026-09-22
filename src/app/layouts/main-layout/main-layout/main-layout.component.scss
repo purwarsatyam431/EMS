@@ -1,0 +1,128 @@
+.sidenav-container {
+  height: 100vh;
+}
+
+
+/* =========================
+   SIDEBAR
+   ========================= */
+
+.sidenav {
+  width: 250px;
+  background-color: var(--sidenav-background-color) !important;
+  color: var(--sidenav-text-color) !important;
+  border-right: 1px solid var(--border-color);
+}
+
+.sidebar-header {
+  height: 64px;
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+  font-size: 22px;
+  font-weight: 700;
+  // color: var(--sidenav-text-color);
+}
+
+
+/* =========================
+   SIDEBAR MENU
+   ========================= */
+
+mat-nav-list {
+  padding-top: 12px;
+  color: rebeccapurple;
+  
+}
+mat-nav-list a {
+  color: var(--sidenav-text-color) !important;
+}
+
+mat-nav-list mat-icon , mat-nav-list span {
+  color: var(--sidenav-text-color);
+}
+
+
+/* Hover */
+
+mat-nav-list a:hover {
+  background-color: var(--sidenav-active-background-color);
+  color: var(--sidenav-text-color);
+}
+
+
+/* Active menu */
+
+// mat-nav-list a.active  {
+//   background-color: var(--sidenav-active-background-color);
+//   color: var(--sidenav-text-color);
+
+// }
+
+/* =========================
+   TOOLBAR
+   ========================= */
+
+.app-toolbar {
+  background-color: var(--surface-color) !important;
+  color: var(--text-color) !important;
+
+  border-bottom: 1px solid var(--border-color);
+
+  box-shadow: none !important;
+}
+
+
+/* Toolbar icons */
+
+.app-toolbar mat-icon {
+  color: var(--text-color);
+}
+
+.app-toolbar button {
+  color: var(--text-color);
+}
+
+
+/* =========================
+   PAGE CONTENT
+   ========================= */
+
+.page-content {
+  min-height: calc(100vh - 64px);
+
+  padding: 24px;
+
+  background-color: var(--background-color);
+  color: var(--text-color);
+
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+
+
+/* =========================
+   SPACER
+   ========================= */
+
+.spacer {
+  flex: 1;
+}
+
+
+/* =========================
+   MOBILE
+   ========================= */
+
+@media (max-width: 768px) {
+
+  .sidenav {
+    width: 240px;
+  }
+
+  .page-content {
+    padding: 16px;
+  }
+
+}
